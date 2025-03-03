@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Cards</title>
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+    <meta name="theme-color" content="#db4938" />
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Belanosima&family=Hind+Siliguri&family=Ubuntu&display=swap");
+    </style>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
+
+
+
+<body>
+    <main>
+        <div id="splash" class=""><img class="image-logo" src="/images/icons/icon-512x512.png" /> </div>
+        <div class="container">
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn" class="hidden">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select the number of questions:</h2>
+                    <div class="radio-buttons">
+                        <label>
+                            <input type="radio" name="optionCount" value="10" checked />
+                            <span>10</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="optionCount" value="20" />
+                            <span>20</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="optionCount" value="30" />
+                            <span>30</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="optionCount" value="40" />
+                            <span>40</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="optionCount" value="50" />
+                            <span>50</span>
+                        </label>
+                    </div>
+                    <button class="btn btn-outline-primary hidden" id="confirmBtn"
+                        style="margin: 0 auto; width: 50%;">Confirm</button>
+                </div>
+            </div>
+
+            <!-- create a div element for time-->
+            <div class="time">
+                <h4 id="time">Time left:</h4>
+            </div>
+            <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0"
+                aria-valuemax="100">
+                <div class="progress-bar" style="width: 0%"></div>
+            </div>
+            <!-- Question and 4 to 5 answers element-->
+            <div class="questionAndAnswer">
+                <h4 class="question">Question</h4>
+                <div class="answers">
+                    <div class="answer" onclick="answer('A')">
+                        <input type="checkbox" class="mobile-checkbox" name="answer" id="A" />
+                        <label class="answer">Answer 1</label>
+                    </div>
+                    <div class="answer" onclick="answer('B')">
+                        <input type="checkbox" class="mobile-checkbox" name="answer" id="B" />
+                        <label class="answer">Answer 2</label>
+                    </div>
+                    <div class="answer" onclick="answer('C')">
+                        <input type="checkbox" class="mobile-checkbox" name="answer" id="C" />
+                        <label class="answer">Answer 3</label>
+                    </div>
+                    <div class="answer" onclick="answer('D')">
+                        <input type="checkbox" class="mobile-checkbox" name="answer" id="D" />
+                        <label class="answer">Answer 4</label>
+                    </div>
+                    <div class="answer" onclick="answer('E')">
+                        <input type="checkbox" class="mobile-checkbox" name="answer" id="E" />
+                        <label class="answer">Answer 5</label>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="btnRestart" type="button" class="btn btn-outline-warning restart-button"
+                    onclick="btnRestart()">Restart</button>
+                    <button id="btnAnswer" type="button" class="btn btn-outline-primary answer-button"
+                    onclick="checkAnswer()" title="Keyboard Hotkey 'A'">Answer</button>
+                    <button id="btnNextQuestion" onclick="btnNextQuestion()" type="button"
+                    class="btn btn-outline-success next-button" title="Keyboard Hotkey 'S'">Next Question</button>
+                </div>
+                <div class="buttons">
+                    <button id="btnRefresh" type="button" class="btn btn-outline-warning refresh-button"
+                    onclick="btnRefresh()">Hard Refresh</button>
+                </div>
+                <div class="status"></div>
+                <div class="post-answer-message"></div>
+            </div>
+            <div class="score"></div>
+        </div>
+    </main>
+</body>
+
+<script>
+    // remove animation styles after animated the first time.
+    // for some reason window.Performance.navigation.type is not working on mobile devices
+    if (window.performance.navigation.type != 0) {
+        document.querySelector("#splash").classList.add("after-animated");
+    }
+</script>
+<!-- Development -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="scripts.js"></script>
+
+</html>

@@ -1,0 +1,322 @@
+/* body {
+background-color: lightgoldenrodyellow;
+} */
+
+#splash {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    translate: translateX(-50%);
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background-color: yellow;
+    left: 0%;
+    transition: background-color 800ms cubic-bezier(.35,.01,.69,.99) 400ms, height 700ms cubic-bezier(.54,.8,.06,.99) 1200ms, width 700ms cubic-bezier(.54,.8,.06,.99) 1900ms, left 700ms cubic-bezier(.54,.8,.06,.99) 1900ms;
+    /* transition-property: height, width , left;
+    transition-duration: 300ms;
+    transition-delay: 1200ms;
+    transition-timing-function: cubic-bezier(.23,.11,.23,.99); */
+}
+@keyframes fadeout {
+    0% { background-color: rgb(255, 255, 0, 1.0);}
+    24% { background-color: rgb(255, 255, 0, 0.1);}
+    25% { background-color: rgb(255, 255, 0, 0.0);}
+    100% {background-color:  rgb(255, 255, 0, 0.0);}
+}
+
+
+#splash.after-animated {
+    height: 10vh;
+    width: 10vw;
+    background-color: rgb(0,0,0,0);
+    left: 90%;
+    transition-duration: 0;
+    transition-delay: 0;
+}
+
+#splash.animate {
+    /* animation-name: fadeout;
+    animation-duration: 300ms;
+    animation-delay: 1000ms; */    
+    transition-delay: 0;
+    background-color: rgb(0,0,0,0.0);
+    height: 10vh;
+    width: 10vw;
+    /* background-color: rgb(0,0,0,0); */
+    left: 90%;
+}
+
+.image-logo {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+}
+
+/* center div.question using flex */
+div.question {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin-top: 3ch;
+}
+
+h4.question {
+    font-size: 2.5em;
+    font-weight: 400;
+    margin-bottom: 1em;
+    width: 60%;
+    background-color: yellow;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1ch;
+    margin: 0 auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Belanosima', sans-serif;
+}
+
+div.answer {
+    display: flex;
+    font-family: "Hind Siliguri", sans-serif;
+    margin: 2ch auto;
+    padding: 1ch 3ch;
+    background-color: lightblue;
+    border-radius: 10px;
+    /* width: 50%; */
+    font-size: 14px;
+}
+
+
+div.answer>input {
+    margin: 16px;
+}
+
+div.answer>label {
+    display: flex;
+    align-items: center;
+}
+
+.questionAndAnswer {
+    margin-top: 5ch;
+}
+
+button.btn {
+    margin: 0 1ch;
+    display: block;
+}
+
+div.buttons {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 3ch;
+    width: 80%;
+}
+
+div.post-answer-message {
+    margin-top: 3ch auto;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 400;
+    color: green;
+}
+
+.wrong-answer {
+    background-color: red !important;
+}
+
+.correct-answer {
+    background-color: green !important;
+    color: yellow;
+}
+
+div.status {
+    text-align: center;
+}
+
+div.score {
+    margin-top: 1ch;
+    text-align: center;
+    font-size: 4em;
+    font-weight: 400;
+    color: green;
+}
+
+div.progress {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.radio-buttons>label>span {
+    margin-left: 1ch;
+    margin-right: 2ch;
+}
+
+/* div.answer to be 50% for desktop screen and 100% for mobile */
+.refresh-button {
+    display: none;
+}
+
+@media screen and (max-width: 3000px) {
+    div.answer {
+        width: 50%;
+    }
+
+    h4.question {
+        width: 60%;
+    }
+
+    .modal-content {
+        width: 50%;
+        font-size: 36px;
+    }
+
+    .radio-buttons {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    div.answer {
+        width: 100%;
+    }
+
+    h4.question {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 50%;
+        font-size: 20px;
+    }
+
+    .radio-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 36px;
+    }
+
+    .radio-buttons>label {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    div.answer {
+        width: 100%;
+    }
+
+    h4.question {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    div.score {
+        font-size: 2em;
+    }
+
+    .modal-content {
+        width: 90%;
+        font-size: 12px;
+    }
+
+    .radio-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 36px;
+    }
+
+    .refresh-button {
+        display: block;
+    }
+
+    .mobile-checkbox {
+        min-height: 40px;
+        min-width: 40px;
+    }
+    #splash.after-animated {
+        left: 80%;
+        height: 10vh;
+        width: 20vw;
+    }
+    #splash.animate {
+        left: 80%;
+        height: 10vh;
+        width: 20vw;
+    }
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
